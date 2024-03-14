@@ -1,0 +1,16 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "A node app designed to connect to Azure OpenAI and chat with your own data.",
+  "main": "index.js",
+  "scripts": {
+    "env": "azd env get-values --no-prompt > .env"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/identity": "^4.0.1",
+    "@azure/openai": "^1.0.0-beta.11",
+    "dotenv": "^16.4.5"
+  }
+}

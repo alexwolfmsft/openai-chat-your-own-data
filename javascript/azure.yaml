@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+# This is an example starter azure.yaml file containing several example services in comments below.
+# Make changes as needed to describe your application setup.
+# To learn more about the azure.yaml file, visit https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-schema
+
+# Name of the application.
+name: azd-starter
+# services:
+#   ## An example for a python API service.
+#   ## The service is named 'python-api'.
+#   ## The language is 'python'.
+#   ## The source code is located in the project (azure.yaml) directory.
+#   ## The service will be hosted on Azure App Service.
+#   python-api:
+#     language: python
+#     project: ./
+#     host: appservice
+#   ## An example for a NodeJS API, located in src/api.
+#   nodejs-api:
+#     language: js
+#     project: ./src/api
+#     host: appservice
+#   ## An example for a React front-end app.
+#   ## The src/react-app/build folder is where the app is built to after `npm run build`.
+#   react-web:
+#     language: js
+#     project: ./src/react-app
+#     host: appservice
+#     dist: build
+hooks:
+  postprovision:
+    windows:
+      run: |
+       export AZURE_AI_SEARCH_API_KEY=${AZURE_AI_SEARCH_API_KEY}
+       export AZURE_AI_SEARCH_ENDPOINT=${AZURE_AI_SEARCH_ENDPOINT}
+       export AZURE_AI_SEARCH_INDEX=${AZURE_AI_SEARCH_INDEX}
+       export AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+       export AZURE_OPENAI_DEPLOYMENT_NAME=${AZURE_OPENAI_DEPLOYMENT_NAME}
+       export AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
+       azd env get-values --no-prompt > src/.env
+      shell: sh
+      continueOnError: false
+      interactive: true
+    posix:
+      run: |
+       export AZURE_AI_SEARCH_API_KEY=${AZURE_AI_SEARCH_API_KEY}
+       export AZURE_AI_SEARCH_ENDPOINT=${AZURE_AI_SEARCH_ENDPOINT}
+       export AZURE_AI_SEARCH_INDEX=${AZURE_AI_SEARCH_INDEX}
+       export AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+       export AZURE_OPENAI_DEPLOYMENT_NAME=${AZURE_OPENAI_DEPLOYMENT_NAME}
+       export AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
+       azd env get-values --no-prompt > src/.env
+      shell: sh
+      continueOnError: false
+      interactive: true
+infra: 
+  path: ../infra/
